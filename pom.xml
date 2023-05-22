@@ -55,7 +55,7 @@
         <!-- The liquibase version should match the one managed by
         https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies/${spring-boot.version} -->
         <liquibase.version>4.15.0</liquibase.version>
-        <liquibase-hibernate5.version>4.15.0</liquibase-hibernate5.version>
+        <liquibase-hibernate5.version>4.22.0</liquibase-hibernate5.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jaxb-runtime.version>4.0.0</jaxb-runtime.version>
         <archunit-junit5.version>0.22.0</archunit-junit5.version>
@@ -292,6 +292,11 @@
             <artifactId>metrics-core</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -358,6 +363,10 @@
                 <artifactId>modernizer-maven-plugin</artifactId>
             </plugin>
             <!-- jhipster-needle-maven-add-plugin -->
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+            </plugin>
         </plugins>
         <pluginManagement>
             <plugins>
@@ -747,6 +756,56 @@
 
                 </plugin>
                 <!-- jhipster-needle-maven-add-plugin-management -->
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase.version}</version>
+                    <configuration>
+                        <changeLogFile>${project.basedir}/src/main/resources/config/liquibase/master.xml</changeLogFile>
+                        <diffChangeLogFile>${project.basedir}/src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+                        <driver>com.mysql.cj.jdbc.Driver</driver>
+                        <url>jdbc:mysql://localhost:3306/ItaloGenealogy</url>
+                        <defaultSchemaName>ItaloGenealogy</defaultSchemaName>
+                        <username>root</username>
+                        <password>root</password>
+                        <referenceUrl>hibernate:spring:com.delaiglesia.italogenealogy.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                        <verbose>true</verbose>
+                        <logging>debug</logging>
+                        <contexts>!test</contexts>
+                        <diffExcludeObjects>oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token</diffExcludeObjects>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.liquibase</groupId>
+                            <artifactId>liquibase-core</artifactId>
+                            <version>${liquibase.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.liquibase.ext</groupId>
+                            <artifactId>liquibase-hibernate5</artifactId>
+                            <version>${liquibase-hibernate5.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-data-jpa</artifactId>
+                            <version>${spring-boot.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>javax.validation</groupId>
+                            <artifactId>validation-api</artifactId>
+                            <version>${validation-api.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <executions>
+                        <execution>
+                            <id>generateChangeLog</id>
+                            <goals>
+                                <!-- Define los goals que deseas ejecutar -->
+                                <goal>generateChangeLog</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
             </plugins>
         </pluginManagement>
     </build>

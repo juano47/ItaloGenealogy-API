@@ -1,0 +1,40 @@
+// an ignored comment
+/** not an ignored comment */
+entity Certificate {
+	fatherName String,
+    fatherLastName String,
+    motherName String,
+    motherLastName String,
+    marriedTo String,
+	name String,
+    lastName String,
+    //it can be birth, married or death date
+	date LocalDate,
+    certificateType CertificateType,
+	city String,
+    province String,
+    country String
+    bloodLine BloodLine,
+}
+
+enum BloodLine {
+	FATHER,
+    MOTHER
+}
+
+enum CertificateType {
+	BIRTH,
+    MARRIED,
+    DEATH
+}
+
+relationship OneToOne {
+	Certificate{certificate(fatherName)} to Certificate
+    Certificate{certificate(motherName)} to Certificate
+    Certificate{certificate(marriedTo)} to Certificate
+}
+
+// Set pagination options
+paginate Certificate with infinite-scroll
+service all with serviceImpl
+dto * with mapstruct
