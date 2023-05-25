@@ -9,20 +9,8 @@ import org.mapstruct.*;
  */
 @Mapper(componentModel = "spring")
 public interface CertificateMapper extends EntityMapper<CertificateDTO, Certificate> {
-
-
-/*    @Named("certificateFatherName")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "fatherName", source = "fatherName")
-    CertificateDTO toDtoCertificateFatherName(Certificate certificate);
-
-    @Named("certificateMotherName")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "motherName", source = "motherName")
-    CertificateDTO toDtoCertificateMotherName(Certificate certificate);
-
-    @Named("certificateMarriedTo")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "marriedTo", source = "marriedTo")
-    CertificateDTO toDtoCertificateMarriedTo(Certificate certificate);*/
+	Certificate toEntity(CertificateDTO dto);
+	CertificateDTO toDto(Certificate entity);
+	CertificateDTO[] toDto(Certificate[] entity);
+	Iterable<CertificateDTO> toDto(Iterable<Certificate> entity);
 }

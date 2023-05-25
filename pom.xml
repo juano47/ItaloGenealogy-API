@@ -59,7 +59,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <jaxb-runtime.version>4.0.0</jaxb-runtime.version>
         <archunit-junit5.version>0.22.0</archunit-junit5.version>
-        <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
         <caffeine.version>3.1.1</caffeine.version>
         <!-- Plugin versions -->
         <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
@@ -184,6 +184,11 @@
             <version>${liquibase.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
@@ -192,6 +197,13 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- Dependencia de Lombok MapStruct Binding -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok-mapstruct-binding</artifactId>
+            <version>0.2.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -292,11 +304,6 @@
             <artifactId>metrics-core</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -412,6 +419,16 @@
                                 <groupId>org.springframework.boot</groupId>
                                 <artifactId>spring-boot-configuration-processor</artifactId>
                                 <version>${spring-boot.version}</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                                <version>1.18.4</version>
+                            </path>
+                            <path>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok-mapstruct-binding</artifactId>
+                                <version>0.2.0</version>
                             </path>
                             <path>
                                 <groupId>org.mapstruct</groupId>
@@ -796,15 +813,6 @@
                             <version>${validation-api.version}</version>
                         </dependency>
                     </dependencies>
-                    <executions>
-                        <execution>
-                            <id>generateChangeLog</id>
-                            <goals>
-                                <!-- Define los goals que deseas ejecutar -->
-                                <goal>generateChangeLog</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -826,134 +834,6 @@
             <id>tls</id>
             <properties>
                 <profile.tls>,tls</profile.tls>
-            </properties>
-        </profile>
-        <profile>
-            <id>webapp</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>net.nicoulaj.maven.plugins</groupId>
-                        <artifactId>checksum-maven-plugin</artifactId>
-                        <version>${checksum-maven-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>create-pre-compiled-webapp-checksum</id>
-                                <goals>
-                                    <goal>files</goal>
-                                </goals>
-                                <phase>generate-resources</phase>
-                            </execution>
-                            <execution>
-                                <id>create-compiled-webapp-checksum</id>
-                                <goals>
-                                    <goal>files</goal>
-                                </goals>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <csvSummaryFile>checksums.csv.old</csvSummaryFile>
-                                </configuration>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <fileSets>
-                                <fileSet>
-                                    <directory>${project.basedir}</directory>
-                                    <includes>
-                                        <include>src/main/webapp/**/*.*</include>
-                                        <include>target/classes/static/**/*.*</include>
-                                        <include>package-lock.json</include>
-                                        <include>package.json</include>
-                                        <include>webpack/*.*</include>
-                                        <include>tsconfig.json</include>
-                                        <include>.postcss.config.js</include>
-                                    </includes>
-                                    <excludes>
-                                        <exclude>**/app/**/service-worker.js</exclude>
-                                        <exclude>**/app/**/vendor.css</exclude>
-                                    </excludes>
-                                </fileSet>
-                            </fileSets>
-                            <failOnError>false</failOnError>
-                            <failIfNoFiles>false</failIfNoFiles>
-                            <individualFiles>false</individualFiles>
-                            <algorithms>
-                                <algorithm>SHA-1</algorithm>
-                            </algorithms>
-                            <includeRelativePath>true</includeRelativePath>
-                            <quiet>true</quiet>
-                        </configuration>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>${maven-antrun-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <id>eval-frontend-checksum</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                                <configuration>
-                                    <target>
-                                        <condition property="skip.npm" value="true" else="false" >
-                                            <and>
-                                                <available file="checksums.csv" filepath="${project.build.directory}" />
-                                                <available file="checksums.csv.old" filepath="${project.build.directory}" />
-                                                <filesmatch file1="${project.build.directory}/checksums.csv" file2="${project.build.directory}/checksums.csv.old" />
-                                            </and>
-                                        </condition>
-                                    </target>
-                                    <exportAntProperties>true</exportAntProperties>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>install-node-and-npm</id>
-                                <goals>
-                                    <goal>install-node-and-npm</goal>
-                                </goals>
-                                <configuration>
-                                    <nodeVersion>${node.version}</nodeVersion>
-                                    <npmVersion>${npm.version}</npmVersion>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <id>npm install</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                            </execution>
-                            <execution>
-                                <id>webapp build dev</id>
-                                <goals>
-                                    <goal>npm</goal>
-                                </goals>
-                                <phase>generate-resources</phase>
-                                <configuration>
-                                    <arguments>run webapp:build</arguments>
-                                    <environmentVariables>
-                                        <APP_VERSION>${project.version}</APP_VERSION>
-                                    </environmentVariables>
-                                    <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-            <properties>
-                <!-- default Spring profiles -->
-                <spring.profiles.active>dev${profile.no-liquibase}</spring.profiles.active>
             </properties>
         </profile>
         <profile>
@@ -1025,7 +905,7 @@
                                 <url>jdbc:mysql://localhost:3306/ItaloGenealogy</url>
                                 <defaultSchemaName>ItaloGenealogy</defaultSchemaName>
                                 <username>root</username>
-                                <password></password>
+                                <password>root</password>
                                 <referenceUrl>hibernate:spring:com.delaiglesia.italogenealogy.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                                 <verbose>true</verbose>
                                 <logging>debug</logging>

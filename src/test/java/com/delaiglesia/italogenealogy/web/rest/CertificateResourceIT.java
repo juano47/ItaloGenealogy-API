@@ -30,7 +30,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -64,8 +63,8 @@ class CertificateResourceIT {
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
-    private static final CertificateType DEFAULT_CERTIFICATE_TYPE = CertificateType.BIRTH;
-    private static final CertificateType UPDATED_CERTIFICATE_TYPE = CertificateType.MARRIED;
+    private static final CertificateType DEFAULT_CERTIFICATE_TYPE = CertificateType.NACIMIENTO;
+    private static final CertificateType UPDATED_CERTIFICATE_TYPE = CertificateType.CASAMIENTO;
 
     private static final String DEFAULT_CITY = "AAAAAAAAAA";
     private static final String UPDATED_CITY = "BBBBBBBBBB";
@@ -76,8 +75,8 @@ class CertificateResourceIT {
     private static final String DEFAULT_COUNTRY = "AAAAAAAAAA";
     private static final String UPDATED_COUNTRY = "BBBBBBBBBB";
 
-    private static final BloodLine DEFAULT_BLOOD_LINE = BloodLine.FATHER;
-    private static final BloodLine UPDATED_BLOOD_LINE = BloodLine.MOTHER;
+    private static final BloodLine DEFAULT_BLOOD_LINE = BloodLine.PADRE;
+    private static final BloodLine UPDATED_BLOOD_LINE = BloodLine.MADRE;
 
     private static final String ENTITY_API_URL = "/api/certificates";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
