@@ -1,18 +1,9 @@
 package com.delaiglesia.italogenealogy.service.dto;
 
-import com.delaiglesia.italogenealogy.domain.enumeration.BloodLine;
 import com.delaiglesia.italogenealogy.domain.enumeration.CertificateType;
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
  * A DTO for the {@link com.delaiglesia.italogenealogy.domain.Certificate} entity.
@@ -45,12 +36,7 @@ public class CertificateDTO implements Serializable {
 
     private String country;
 
-    private BloodLine bloodLine;
-
-    private CertificateDTO fatherCertificate;
-
-    private CertificateDTO motherCertificate;
-
+    private CertificateDTO ancestorCertificate;
     private CertificateDTO marriedToCertificate;
 
     public Long getId() {
@@ -157,28 +143,12 @@ public class CertificateDTO implements Serializable {
         this.country = country;
     }
 
-    public BloodLine getBloodLine() {
-        return bloodLine;
+    public CertificateDTO getAncestorCertificate() {
+        return ancestorCertificate;
     }
 
-    public void setBloodLine(BloodLine bloodLine) {
-        this.bloodLine = bloodLine;
-    }
-
-    public CertificateDTO getFatherCertificate() {
-        return fatherCertificate;
-    }
-
-    public void setFatherCertificate(CertificateDTO fatherCertificate) {
-        this.fatherCertificate = fatherCertificate;
-    }
-
-    public CertificateDTO getMotherCertificate() {
-        return motherCertificate;
-    }
-
-    public void setMotherCertificate(CertificateDTO motherCertificate) {
-        this.motherCertificate = motherCertificate;
+    public void setAncestorCertificate(CertificateDTO ancestorCertificate) {
+        this.ancestorCertificate = ancestorCertificate;
     }
 
     public CertificateDTO getMarriedToCertificate() {

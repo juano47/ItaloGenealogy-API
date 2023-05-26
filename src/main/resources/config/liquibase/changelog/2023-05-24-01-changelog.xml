@@ -23,22 +23,12 @@
             <column name="city" type="VARCHAR(255)"/>
             <column name="province" type="VARCHAR(255)"/>
             <column name="country" type="VARCHAR(255)"/>
-            <column name="blood_line" type="VARCHAR(255)"/>
-            <column name="father_name_certificate" type="BIGINT"/>
-            <column name="mother_name_certificate" type="BIGINT"/>
+            <column name="ancestor_certificate" type="BIGINT"/>
             <column name="married_to_certificate" type="BIGINT"/>
         </createTable>
     </changeSet>
     <changeSet id="1684942912491-5" author="Juan Ignacio (generated)">
-        <addUniqueConstraint columnNames="father_name_certificate" constraintName="uc_certificate_fathernamecertificate"
-                             tableName="certificate"/>
-    </changeSet>
-    <changeSet id="1684942594806-6" author="Juan Ignacio (generated)">
-        <addUniqueConstraint columnNames="married_to_certificate" constraintName="uc_certificate_marriedtocertificate"
-                             tableName="certificate"/>
-    </changeSet>
-    <changeSet id="1684942594806-7" author="Juan Ignacio (generated)">
-        <addUniqueConstraint columnNames="mother_name_certificate" constraintName="uc_certificate_mothernamecertificate"
+        <addUniqueConstraint columnNames="ancestor_certificate" constraintName="uc_certificate_ancestor_certificate"
                              tableName="certificate"/>
     </changeSet>
     <changeSet id="1684942594806-8" author="Juan Ignacio (generated)">
@@ -48,18 +38,13 @@
         <addUniqueConstraint columnNames="login" constraintName="uc_jhi_user_login" tableName="jhi_user"/>
     </changeSet>
     <changeSet id="1684942594806-10" author="Juan Ignacio (generated)">
-        <addForeignKeyConstraint baseColumnNames="father_name_certificate" baseTableName="certificate"
-                                 constraintName="FK_CERTIFICATE_ON_FATHERNAMECERTIFICATE" referencedColumnNames="id"
+        <addForeignKeyConstraint baseColumnNames="ancestor_certificate" baseTableName="certificate"
+                                 constraintName="FK_CERTIFICATE_ON_ANCESTOR_CERTIFICATE" referencedColumnNames="id"
                                  referencedTableName="certificate"/>
     </changeSet>
     <changeSet id="1684942594806-11" author="Juan Ignacio (generated)">
         <addForeignKeyConstraint baseColumnNames="married_to_certificate" baseTableName="certificate"
-                                 constraintName="FK_CERTIFICATE_ON_MARRIEDTOCERTIFICATE" referencedColumnNames="id"
-                                 referencedTableName="certificate"/>
-    </changeSet>
-    <changeSet id="1684942594806-12" author="Juan Ignacio (generated)">
-        <addForeignKeyConstraint baseColumnNames="mother_name_certificate" baseTableName="certificate"
-                                 constraintName="FK_CERTIFICATE_ON_MOTHERNAMECERTIFICATE" referencedColumnNames="id"
+                                 constraintName="FK_CERTIFICATE_ON_MARRIEDTO_CERTIFICATE" referencedColumnNames="id"
                                  referencedTableName="certificate"/>
     </changeSet>
 

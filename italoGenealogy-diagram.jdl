@@ -14,12 +14,6 @@ entity Certificate {
 	city String,
     province String,
     country String
-    bloodLine BloodLine,
-}
-
-enum BloodLine {
-	FATHER,
-    MOTHER
 }
 
 enum CertificateType {

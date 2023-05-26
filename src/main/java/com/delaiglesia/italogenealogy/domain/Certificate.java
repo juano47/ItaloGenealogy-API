@@ -1,22 +1,25 @@
 package com.delaiglesia.italogenealogy.domain;
 
-import com.delaiglesia.italogenealogy.domain.enumeration.BloodLine;
 import com.delaiglesia.italogenealogy.domain.enumeration.CertificateType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.time.LocalDate;
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * not an ignored comment
@@ -73,19 +76,10 @@ public class Certificate implements Serializable {
     @Column(name = "country")
     private String country;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "blood_line")
-    private BloodLine bloodLine;
-
-    @JsonIgnoreProperties(value = "fatherNameCertificate", allowSetters = true)
+    @JsonIgnoreProperties(value = "ancestorCertificate", allowSetters = true)
     @OneToOne
-    @JoinColumn(unique = true,  name="fatherNameCertificate", referencedColumnName = "id")
-    private Certificate fatherCertificate;
-
-    @JsonIgnoreProperties(value = "motherNameCertificate", allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true, name="motherNameCertificate", referencedColumnName = "id")
-    private Certificate motherCertificate;
+    @JoinColumn(unique = true,  name="ancestorCertificate", referencedColumnName = "id")
+    private Certificate ancestorCertificate;
 
     @JsonIgnoreProperties(value = "marriedToCertificate", allowSetters = true)
     @OneToOne
@@ -196,28 +190,12 @@ public class Certificate implements Serializable {
         this.country = country;
     }
 
-    public BloodLine getBloodLine() {
-        return bloodLine;
+    public Certificate getAncestorCertificate() {
+        return ancestorCertificate;
     }
 
-    public void setBloodLine(BloodLine bloodLine) {
-        this.bloodLine = bloodLine;
-    }
-
-    public Certificate getFatherCertificate() {
-        return fatherCertificate;
-    }
-
-    public void setFatherCertificate(Certificate fatherCertificate) {
-        this.fatherCertificate = fatherCertificate;
-    }
-
-    public Certificate getMotherCertificate() {
-        return motherCertificate;
-    }
-
-    public void setMotherCertificate(Certificate motherCertificate) {
-        this.motherCertificate = motherCertificate;
+    public void setAncestorCertificate(Certificate ancestorCertificate) {
+        this.ancestorCertificate = ancestorCertificate;
     }
 
     public Certificate getMarriedToCertificate() {

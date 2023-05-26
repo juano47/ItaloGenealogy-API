@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.delaiglesia.italogenealogy.IntegrationTest;
 import com.delaiglesia.italogenealogy.domain.Certificate;
-import com.delaiglesia.italogenealogy.domain.enumeration.BloodLine;
 import com.delaiglesia.italogenealogy.domain.enumeration.CertificateType;
 import com.delaiglesia.italogenealogy.repository.CertificateRepository;
 import com.delaiglesia.italogenealogy.service.CertificateService;
@@ -75,9 +74,6 @@ class CertificateResourceIT {
     private static final String DEFAULT_COUNTRY = "AAAAAAAAAA";
     private static final String UPDATED_COUNTRY = "BBBBBBBBBB";
 
-    private static final BloodLine DEFAULT_BLOOD_LINE = BloodLine.PADRE;
-    private static final BloodLine UPDATED_BLOOD_LINE = BloodLine.MADRE;
-
     private static final String ENTITY_API_URL = "/api/certificates";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -121,8 +117,7 @@ class CertificateResourceIT {
             .certificateType(DEFAULT_CERTIFICATE_TYPE)
             .city(DEFAULT_CITY)
             .province(DEFAULT_PROVINCE)
-            .country(DEFAULT_COUNTRY)
-            .bloodLine(DEFAULT_BLOOD_LINE).build();
+            .country(DEFAULT_COUNTRY).build();
         return certificate;
     }
 
@@ -143,8 +138,7 @@ class CertificateResourceIT {
             .certificateType(UPDATED_CERTIFICATE_TYPE)
             .city(UPDATED_CITY)
             .province(UPDATED_PROVINCE)
-            .country(UPDATED_COUNTRY)
-            .bloodLine(UPDATED_BLOOD_LINE).build();
+            .country(UPDATED_COUNTRY).build();
         return certificate;
     }
 
@@ -182,7 +176,6 @@ class CertificateResourceIT {
         assertThat(testCertificate.getCity()).isEqualTo(DEFAULT_CITY);
         assertThat(testCertificate.getProvince()).isEqualTo(DEFAULT_PROVINCE);
         assertThat(testCertificate.getCountry()).isEqualTo(DEFAULT_COUNTRY);
-        assertThat(testCertificate.getBloodLine()).isEqualTo(DEFAULT_BLOOD_LINE);
     }
 
     @Test
@@ -230,8 +223,7 @@ class CertificateResourceIT {
             .andExpect(jsonPath("$.[*].certificateType").value(hasItem(DEFAULT_CERTIFICATE_TYPE.toString())))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
             .andExpect(jsonPath("$.[*].province").value(hasItem(DEFAULT_PROVINCE)))
-            .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY)))
-            .andExpect(jsonPath("$.[*].bloodLine").value(hasItem(DEFAULT_BLOOD_LINE.toString())));
+            .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY)));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -272,8 +264,7 @@ class CertificateResourceIT {
             .andExpect(jsonPath("$.certificateType").value(DEFAULT_CERTIFICATE_TYPE.toString()))
             .andExpect(jsonPath("$.city").value(DEFAULT_CITY))
             .andExpect(jsonPath("$.province").value(DEFAULT_PROVINCE))
-            .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY))
-            .andExpect(jsonPath("$.bloodLine").value(DEFAULT_BLOOD_LINE.toString()));
+            .andExpect(jsonPath("$.country").value(DEFAULT_COUNTRY));
     }
 
     @Test
@@ -305,8 +296,7 @@ class CertificateResourceIT {
             .certificateType(UPDATED_CERTIFICATE_TYPE)
             .city(UPDATED_CITY)
             .province(UPDATED_PROVINCE)
-            .country(UPDATED_COUNTRY)
-            .bloodLine(UPDATED_BLOOD_LINE);
+            .country(UPDATED_COUNTRY);
         CertificateDTO certificateDTO = certificateMapper.toDto(updatedCertificate);
 
         restCertificateMockMvc
@@ -332,7 +322,6 @@ class CertificateResourceIT {
         assertThat(testCertificate.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testCertificate.getProvince()).isEqualTo(UPDATED_PROVINCE);
         assertThat(testCertificate.getCountry()).isEqualTo(UPDATED_COUNTRY);
-        assertThat(testCertificate.getBloodLine()).isEqualTo(UPDATED_BLOOD_LINE);
     }
 
     @Test
@@ -449,7 +438,6 @@ class CertificateResourceIT {
         assertThat(testCertificate.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testCertificate.getProvince()).isEqualTo(UPDATED_PROVINCE);
         assertThat(testCertificate.getCountry()).isEqualTo(UPDATED_COUNTRY);
-        assertThat(testCertificate.getBloodLine()).isEqualTo(DEFAULT_BLOOD_LINE);
     }
 
     @Test
@@ -474,8 +462,7 @@ class CertificateResourceIT {
             .certificateType(UPDATED_CERTIFICATE_TYPE)
             .city(UPDATED_CITY)
             .province(UPDATED_PROVINCE)
-            .country(UPDATED_COUNTRY)
-            .bloodLine(UPDATED_BLOOD_LINE);
+            .country(UPDATED_COUNTRY);
 
         restCertificateMockMvc
             .perform(
@@ -500,7 +487,6 @@ class CertificateResourceIT {
         assertThat(testCertificate.getCity()).isEqualTo(UPDATED_CITY);
         assertThat(testCertificate.getProvince()).isEqualTo(UPDATED_PROVINCE);
         assertThat(testCertificate.getCountry()).isEqualTo(UPDATED_COUNTRY);
-        assertThat(testCertificate.getBloodLine()).isEqualTo(UPDATED_BLOOD_LINE);
     }
 
     @Test
