@@ -1,0 +1,16 @@
+
+entity Certificate {
+}
+
+entity Holder {
+  name String,
+  lastName String,
+  birthDate LocalDate,
+}
+
+relationship OneToMany {
+  Holder to Certificate
+}
+
+service all with serviceImpl
+dto * with mapstruct

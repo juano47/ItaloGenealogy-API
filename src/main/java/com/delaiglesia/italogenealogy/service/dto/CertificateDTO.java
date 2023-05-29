@@ -39,6 +39,8 @@ public class CertificateDTO implements Serializable {
     private CertificateDTO ancestorCertificate;
     private CertificateDTO marriedToCertificate;
 
+    private HolderDTO holder;
+
     public Long getId() {
         return id;
     }
@@ -157,5 +159,13 @@ public class CertificateDTO implements Serializable {
 
     public void setMarriedToCertificate(CertificateDTO marriedToCertificate) {
         this.marriedToCertificate = marriedToCertificate;
+    }
+
+    public HolderDTO getHolder() {
+        return holder;
+    }
+
+    public void setHolder(HolderDTO holder) {
+        this.holder = holder;
     }
 }

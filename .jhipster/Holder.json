@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20230526160013",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "holder",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "birthDate",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Holder",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "certificate",
+      "otherEntityRelationshipName": "holder",
+      "relationshipName": "certificate",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

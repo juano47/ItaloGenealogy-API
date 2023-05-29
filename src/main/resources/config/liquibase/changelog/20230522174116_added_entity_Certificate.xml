@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity Certificate.
+    -->
+    <changeSet id="1684942594806-1" author="Juan Ignacio (generated)">
+        <createTable tableName="certificate">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_certificate"/>
+            </column>
+            <column name="father_name" type="VARCHAR(255)"/>
+            <column name="father_last_name" type="VARCHAR(255)"/>
+            <column name="mother_name" type="VARCHAR(255)"/>
+            <column name="mother_last_name" type="VARCHAR(255)"/>
+            <column name="married_to" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="date" type="DATE"/>
+            <column name="certificate_type" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="province" type="VARCHAR(255)"/>
+            <column name="country" type="VARCHAR(255)"/>
+            <column name="ancestor_certificate" type="BIGINT"/>
+            <column name="married_to_certificate" type="BIGINT"/>
+            <column name="holder_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -50,6 +50,8 @@ public class CacheConfiguration {
             createCache(cm, com.delaiglesia.italogenealogy.domain.User.class.getName() + ".authorities");
             createCache(cm, com.delaiglesia.italogenealogy.domain.Certificate.class.getName());
             createCache(cm, com.delaiglesia.italogenealogy.domain.Certificate.class.getName() + ".certificates");
+            createCache(cm, com.delaiglesia.italogenealogy.domain.Holder.class.getName());
+            createCache(cm, com.delaiglesia.italogenealogy.domain.Holder.class.getName() + ".certificates");
             // jhipster-needle-ehcache-add-entry
         };
     }

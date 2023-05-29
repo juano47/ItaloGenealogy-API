@@ -11,5 +11,7 @@
     <property name="datetimeType" value="datetime(6)" dbms="mysql"/>
 
     <include file="config/liquibase/changelog/initial_schema.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/2023-05-24-01-changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230526160013_added_entity_Holder.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230522174116_added_entity_Certificate.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20230522174116_added_entity_constraints_Certificate.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

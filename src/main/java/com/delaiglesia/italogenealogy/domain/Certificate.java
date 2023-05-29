@@ -16,13 +16,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * not an ignored comment
+ * A Certificate.
  */
 @Entity
 @Table(name = "certificate")
@@ -85,6 +86,10 @@ public class Certificate implements Serializable {
     @OneToOne
     @JoinColumn(unique = true, name="marriedToCertificate", referencedColumnName = "id")
     private Certificate marriedToCertificate;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "certificates" }, allowSetters = true)
+    private Holder holder;
 
     public Long getId() {
         return id;
@@ -204,5 +209,13 @@ public class Certificate implements Serializable {
 
     public void setMarriedToCertificate(Certificate marriedToCertificate) {
         this.marriedToCertificate = marriedToCertificate;
+    }
+
+    public Holder getHolder() {
+        return holder;
+    }
+
+    public void setHolder(Holder holder) {
+        this.holder = holder;
     }
 }

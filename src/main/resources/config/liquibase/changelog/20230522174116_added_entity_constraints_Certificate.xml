@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--Added the constraints for entity Certificate.-->
+    <changeSet id="1684942912491-5" author="Juan Ignacio (generated)">
+        <addUniqueConstraint columnNames="ancestor_certificate" constraintName="uc_certificate_ancestor_certificate"
+                             tableName="certificate"/>
+    </changeSet>
+    <changeSet id="1684942594806-8" author="Juan Ignacio (generated)">
+        <addUniqueConstraint columnNames="email" constraintName="uc_jhi_user_email" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet id="1684942594806-9" author="Juan Ignacio (generated)">
+        <addUniqueConstraint columnNames="login" constraintName="uc_jhi_user_login" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet id="1684942594806-10" author="Juan Ignacio (generated)">
+        <addForeignKeyConstraint baseColumnNames="ancestor_certificate" baseTableName="certificate"
+                                 constraintName="FK_CERTIFICATE_ON_ANCESTOR_CERTIFICATE" referencedColumnNames="id"
+                                 referencedTableName="certificate"/>
+    </changeSet>
+    <changeSet id="1684942594806-11" author="Juan Ignacio (generated)">
+        <addForeignKeyConstraint baseColumnNames="married_to_certificate" baseTableName="certificate"
+                                 constraintName="FK_CERTIFICATE_ON_MARRIEDTO_CERTIFICATE" referencedColumnNames="id"
+                                 referencedTableName="certificate"/>
+    </changeSet>
+    <changeSet id="20230522174116-2" author="jhipster">
+        <addForeignKeyConstraint baseColumnNames="holder_id"
+                                 baseTableName="certificate"
+                                 constraintName="fk_certificate__holder_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="holder"/>
+    </changeSet>
+</databaseChangeLog>

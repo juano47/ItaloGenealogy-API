@@ -4,81 +4,18 @@
   "dto": "mapstruct",
   "embedded": false,
   "entityTableName": "certificate",
-  "fields": [
-    {
-      "fieldName": "fatherName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "motherName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "marriedTo",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "name",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "lastName",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "date",
-      "fieldType": "LocalDate"
-    },
-    {
-      "fieldName": "certificateType",
-      "fieldType": "CertificateType",
-      "fieldValues": "BIRTH,MARRIED,DEATH"
-    },
-    {
-      "fieldName": "city",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "province",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "country",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "bloodLine",
-      "fieldType": "BloodLine",
-      "fieldValues": "FATHER,MOTHER"
-    }
-  ],
+  "fields": [],
   "fluentMethods": true,
-  "javadoc": "not an ignored comment",
   "jpaMetamodelFiltering": false,
   "name": "Certificate",
-  "pagination": "infinite-scroll",
+  "pagination": "no",
   "readOnly": false,
   "relationships": [
     {
-      "otherEntityField": "fatherName",
-      "otherEntityName": "certificate",
-      "ownerSide": true,
-      "relationshipName": "certificate",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityField": "motherName",
-      "otherEntityName": "certificate",
-      "ownerSide": true,
-      "relationshipName": "certificate",
-      "relationshipType": "one-to-one"
-    },
-    {
-      "otherEntityField": "marriedTo",
-      "otherEntityName": "certificate",
-      "ownerSide": true,
-      "relationshipName": "certificate",
-      "relationshipType": "one-to-one"
+      "otherEntityName": "holder",
+      "otherEntityRelationshipName": "certificate",
+      "relationshipName": "holder",
+      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceImpl"
