@@ -50,6 +50,12 @@ spring:
     contexts: prod
   thymeleaf:
     cache: true
+  security:
+    oauth2:
+      client:
+        provider:
+          oidc:
+            issuer-uri: https://lemur-5.cloud-iam.com/realms/genealogy
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
