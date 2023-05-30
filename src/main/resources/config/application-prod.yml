@@ -55,7 +55,7 @@ spring:
       client:
         provider:
           oidc:
-            issuer-uri: https://lemur-5.cloud-iam.com/realms/genealogy
+            issuer-uri: https://lemur-5.cloud-iam.com/auth/realms/genealogy
 
 # ===================================================================
 # To enable TLS in production, generate a certificate using:
